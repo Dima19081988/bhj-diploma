@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 /**
  * Класс LoginForm управляет формой
  * входа в портал
@@ -9,7 +11,20 @@ class LoginForm extends AsyncForm {
    * устанавливает состояние App.setState( 'user-logged' ) и
    * закрывает окно, в котором находится форма
    * */
-  onSubmit(data) {
+  onSubmit(data) {  
+    User.login(data, (response) => {
+      if(response.success) {
+        this.element.reset();
 
-  }
+        App.setState('user-logged');
+
+        // const modal = App.getModal('#modal-login');
+        // modal.close();
+        this.close();
+      } else {
+        console.error(response.error);
+        alert(response.error || 'Произошла ошибка авторизации');
+      };
+    });
+  };
 }

@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 /**
  * Класс CreateAccountForm управляет формой
  * создания нового счёта
@@ -9,6 +11,16 @@ class CreateAccountForm extends AsyncForm {
    * и сбрасывает форму
    * */
   onSubmit(data) {
+    Account.create(data, (response) => {
+      if(response.success) {
+        this.close();
 
-  }
+        App.update();
+        this.element.reset();
+      } else {
+        console.error(response.error);
+        alert(response.error || 'Не получилось создать аккаунт:');
+      };
+    });
+  };
 }
