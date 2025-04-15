@@ -6,7 +6,13 @@ const createRequest = (options = {}) => {
     const { url, method = 'GET', data, callback} = options;
 
     const xhr = new XMLHttpRequest();
-    xhr.open(method, url);
+
+    if (method === 'GET' && data) {
+        const queryParams = new URLSearchParams(data).toString();
+        xhr.open(method, `${url}?${queryParams}`);
+    } else {
+        xhr.open(method, url);
+    }
 
     xhr.responseType = 'json';
 
@@ -18,7 +24,7 @@ const createRequest = (options = {}) => {
         }
     };
 
-    if (method != 'GET') {
+    if (method != 'GET' && data) {
         if (data) {
             const formData = new FormData()
             for (key in data) {
