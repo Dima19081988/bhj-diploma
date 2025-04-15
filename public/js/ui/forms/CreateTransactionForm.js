@@ -1,5 +1,3 @@
-const { response } = require("express");
-
 /**
  * Класс CreateTransactionForm управляет формой
  * создания новой транзакции
@@ -11,6 +9,7 @@ class CreateTransactionForm extends AsyncForm {
    * */
   constructor(element) {
     super(element);
+    this.type = type;
     this.renderAccountsList();
   }
 
@@ -19,16 +18,14 @@ class CreateTransactionForm extends AsyncForm {
    * Обновляет в форме всплывающего окна выпадающий список
    * */
   renderAccountsList() {
-    Account.list((accounts) => {
-      const select = this.element.getElementById('expense-accounts-list')
-      select.innerHTML = '';
+    Account.list((accounts) => { 
+      const select = this.element.querySelector('.accounts-select');
 
-      accounts.forEach(account => {
-        const option = document.createElement('option');
-        option.value = account.id;
-        option.textContent = account.name;
-        select.appendChild(option);     
-      });
+      const optionsHtml = accounts.reduce((html, account) => {
+        return html + `<option value="${account.id}">${account.name}</option>`;
+      }, '');
+
+      select.innerHTML = optionsHtml;
     });
   }
 
@@ -43,7 +40,10 @@ class CreateTransactionForm extends AsyncForm {
       if(response.success) {
         App.update();
         this.element.reset();
-        this.close();
+
+        const modalId = this.type === 'income' ? 'modal-new-income' : 'modal-new-expense';
+        const modal = App.getModal(modalId);
+        modal.close();
       } else {
         console.log(response.error);
         alert(response.error || 'ошибка транзакции');

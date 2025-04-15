@@ -1,4 +1,3 @@
-const { response } = require("express");
 
 /**
  * Класс CreateAccountForm управляет формой
@@ -13,8 +12,8 @@ class CreateAccountForm extends AsyncForm {
   onSubmit(data) {
     Account.create(data, (response) => {
       if(response.success) {
-        this.close();
-
+        const modal = App.getModal('modal-login');
+        modal.close();
         App.update();
         this.element.reset();
       } else {
