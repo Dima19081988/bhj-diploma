@@ -1,5 +1,3 @@
-const { response } = require("express");
-
 /**
  * Класс TransactionsPage управляет
  * страницей отображения доходов и
@@ -42,10 +40,11 @@ class TransactionsPage {
     });
 
     this.element.addEventListener('click', (event) => {
-      if (event.target.classList.contains('transaction__remove')) {
-        const transactionId = event.target.dataset.id;
+      const transactionElement = event.target.closest('.transaction__remove');
+      if (transactionElement) {
+        const transactionId = transactionElement.dataset.id;
         this.removeTransaction(transactionId);
-      };
+      }
     });
   }
 
@@ -64,7 +63,7 @@ class TransactionsPage {
     }
     const confirmation = confirm('Вы действительно хотите удалить аккаунт?');
     if (confirmation) {
-      Account.remove(this.lastOptions.account_id, (response) => {
+      Account.remove({ id: this.lastOptions.account_id }, (response) => {
         if (response.success) {
           App.updateWidgets();
           App.updateForms();
@@ -83,7 +82,7 @@ class TransactionsPage {
   removeTransaction( id ) {
     const confirmation = confirm('Вы действительно хотите удалить эту транзакцию?');
     if (confirmation) {
-      Transaction.remove(id, (response) => {
+      Transaction.remove({ id: id }, (response) => {
         if(response.success) {
           this.update()
         };
@@ -185,7 +184,7 @@ class TransactionsPage {
    * используя getTransactionHTML
    * */
   renderTransactions(data){
-    const contentElement = document.querySelector('.content');
+    const contentElement = this.element.querySelector('.content');
     contentElement.innerHTML = data.map(item => this.getTransactionHTML(item)).join('');
   };
 }

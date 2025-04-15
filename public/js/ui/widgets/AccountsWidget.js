@@ -14,7 +14,7 @@ class AccountsWidget {
    * необходимо выкинуть ошибку.
    * */
   constructor(element) {
-    if(!this.element) {
+    if(!element) {
       throw new Error('Элемент не существует');
     }
     this.element = element;
@@ -38,7 +38,7 @@ class AccountsWidget {
       event.preventDefault();
       const accountElement = event.target.closest('.account');
       if (accountElement) {
-        this.onSelectAccount();
+        this.onSelectAccount(accountElement);
       }
     })
   }
@@ -72,7 +72,7 @@ class AccountsWidget {
    * в боковой колонке
    * */
   clear() {
-    const accountElements = document.querySelectorAll('.account');
+    const accountElements = this.element.querySelectorAll('.account');
     accountElements.forEach(account => account.remove());
   }
 
@@ -91,7 +91,7 @@ class AccountsWidget {
 
     element.classList.add('active');
 
-    const accountId = document.getAttribute('data-id');
+    const accountId = element.getAttribute('data-id');
 
     App.showPage( 'transactions', { account_id: accountId });   
 
@@ -104,7 +104,7 @@ class AccountsWidget {
    * */
   getAccountHTML(item){
     return `
-      <li class="active account" data-id='${item.id}'>
+      <li class="account" data-id='${item.id}'>
         <a href="#">
             <span>${item.name}</span> /
             <span>${item.sum}</span>
@@ -125,8 +125,8 @@ class AccountsWidget {
     const dataContainer = document.createElement('div');
     dataContainer.innerHTML = html;
 
-    while(dataContainer.firstChild) {
-      this.element.appendChild(dataContainer.firstChild);
+    for (const child of dataContainer.children) {
+      this.element.appendChild(child)
     }
   }
 }
