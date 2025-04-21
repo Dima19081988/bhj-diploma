@@ -15,7 +15,7 @@ class UserWidget {
     if(!element) {
       throw new Error ('Элемент не может быть пустым');
     }
-    element = this.element;
+    this.element = element;
   }
 
   /**
