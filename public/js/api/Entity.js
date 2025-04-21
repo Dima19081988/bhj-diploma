@@ -13,14 +13,8 @@ class Entity {
     createRequest({
       url: this.URL,
       method: 'GET',
-      data: data,
-      callback: (err, response) => {
-        if(err) {
-          callback(err, null);
-          return;
-        }
-        callback(null, response);
-      }
+      data,
+      callback
     });
   }
 
@@ -33,14 +27,8 @@ class Entity {
     createRequest({
       url: this.URL,
       method: 'PUT',
-      data: data,
-      callback: (err, response) => {
-        if(err) {
-          callback(err, null);
-          return;
-        }
-        callback(null, response);
-      }
+      data,
+      callback
     });
   }
 
@@ -52,14 +40,8 @@ class Entity {
     createRequest({
       url: this.URL,
       method: 'DELETE',
-      data: data,
-      callback: (err, response) => {
-        if(err) {
-          callback(err, null);
-          return;
-        }
-        callback(null, response);
-      }
+      data,
+      callback
     });
   };
 }
