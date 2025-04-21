@@ -105,7 +105,7 @@ class TransactionsPage {
     Account.get(options.account_id, (account) => {
       if(account) {
         this.renderTitle(account.name);
-        Transaction.list(options.account_id, (transactions) => {
+        Transaction.list({ account_id: options.account_id }, (transactions) => {
           this.renderTransactions(transactions);
         });
       };
