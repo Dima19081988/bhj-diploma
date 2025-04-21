@@ -7,7 +7,7 @@ class CreateTransactionForm extends AsyncForm {
    * Вызывает родительский конструктор и
    * метод renderAccountsList
    * */
-  constructor(element) {
+  constructor(element, type) {
     super(element);
     this.type = type;
     this.renderAccountsList();

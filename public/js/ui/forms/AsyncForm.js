@@ -13,10 +13,10 @@ class AsyncForm {
    * через registerEvents()
    * */
   constructor(element) {  
-    if(element) {
+    if(!element) {
       throw new Error('Ошибка получения элемента');
     }
-    element = this.element;
+    this.element = element;
     this.registerEvents();
   }
 
@@ -57,9 +57,7 @@ class AsyncForm {
   //   return data;
   // }
 
-  onSubmit(options){
-
-  }
+  onSubmit(options) {}
 
   /**
    * Вызывает метод onSubmit и передаёт туда
