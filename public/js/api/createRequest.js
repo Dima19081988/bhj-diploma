@@ -9,8 +9,12 @@ const createRequest = (options = {}) => {
     let requestURL = url;
     let requestData = null; 
 
-    if (method === 'GET' && data) {
-        requestURL += `?${new URLSearchParams(data)}`
+    if (method === 'GET') {
+        const queryParams = Object.entries(data)
+            .map(([key, val]) => `${key}=${val}`)
+            .join('&');
+
+        requestURL += `?${queryParams}`;
     } else if (data) {
         requestData = new FormData();
         Object.entries(data).forEach(([key, val]) => requestData.append(key, val));

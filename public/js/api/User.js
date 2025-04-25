@@ -66,7 +66,8 @@ class User {
       callback: (err, response) => {
         if (err) return callback(err);
 
-        if (response && response.user) {
+        if (response.success) {
+          console.log("вход выполнен", response);
           this.setCurrent(response.user);
         }
         callback(null, response);
@@ -89,6 +90,7 @@ class User {
         if (err) return callback(err);
 
         if (response.success) {
+          console.log("регистрация выполнена", response);
           this.setCurrent(response.user);
         }
         callback(null, response);
@@ -109,6 +111,7 @@ class User {
         if (err) return callback(err);
         
         if (response.success) {
+          console.log("выход выполнен", response);
           this.unsetCurrent();
         }
         callback(null, response); 

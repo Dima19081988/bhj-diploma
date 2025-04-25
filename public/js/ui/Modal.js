@@ -12,10 +12,10 @@ class Modal {
 	 * необходимо выкинуть ошибку.
 	 * */
 	constructor(element) {
-		this.element = element;
-		if (!this.element) {
+		if (!element) {
 			throw new Error('Ошибка получения элемента');
-		}
+		}		
+		this.element = element;
 		this.registerEvents();
 	}
 
@@ -26,9 +26,9 @@ class Modal {
 	 * */
 	registerEvents() {
 		const closeButton = this.element.querySelector('[data-dismiss="modal"]');
-
+		console.log('Close button:', closeButton);
 		if (closeButton) {
-			closeButton.addEventListener('click', () => this.onClose())
+			closeButton.addEventListener('click', () => this.onClose());
 		}
 	}
 	/**

@@ -43,12 +43,14 @@ class Sidebar {
 
     loginButton.addEventListener('click', (event) => {
       event.preventDefault();
-      App.getModal("modal-login").open();
+      const modal = App.getModal('login');
+      modal.open();
     });
 
     registerButton.addEventListener('click', (event) => {
       event.preventDefault();
-      App.getModal("modal-register").open();
+      const modal = App.getModal('register');
+      modal.open();
     });
 
     logoutButton.addEventListener('click', (event) => {
