@@ -26,7 +26,6 @@ class Modal {
 	 * */
 	registerEvents() {
 		const closeButton = this.element.querySelector('[data-dismiss="modal"]');
-		console.log('Close button:', closeButton);
 		if (closeButton) {
 			closeButton.addEventListener('click', () => this.onClose());
 		}
