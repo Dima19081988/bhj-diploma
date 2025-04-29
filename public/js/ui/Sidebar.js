@@ -43,21 +43,27 @@ class Sidebar {
 
     loginButton.addEventListener('click', (event) => {
       event.preventDefault();
-      const modal = App.getModal('login');
-      modal.open();
+      App.getModal('login').open();
     });
 
     registerButton.addEventListener('click', (event) => {
       event.preventDefault();
-      const modal = App.getModal('register');
-      modal.open();
+      App.getModal('register').open();
     });
 
     logoutButton.addEventListener('click', (event) => {
       event.preventDefault();
-      User.logout((response) => {
+      User.logout((error, response) => {
+        if(error) {
+          alert('Ошибка при выходе');
+          console.log('Ошибка при выходе:', error);
+          return;
+        }
         if(response.success) {
-          App.setState('init')
+          App.setState('init');
+        } else {
+          alert('Ошибка при выходе');
+          console.log('Ошибка при выходе:', response.error);
         };
       });
     });

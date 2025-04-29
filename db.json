@@ -46,6 +46,16 @@
       "name": "Бизнес",
       "user_id": "1",
       "id": "3"
+    },
+    {
+      "name": "Зарплата",
+      "user_id": "tfp7mwm9wlqo97",
+      "id": "tfp2kgma2lcjfa"
+    },
+    {
+      "name": "Зарплата",
+      "user_id": "tfp8bcm9wkc2cp",
+      "id": "tfpay4ma2lkguq"
     }
   ],
   "transactions": [

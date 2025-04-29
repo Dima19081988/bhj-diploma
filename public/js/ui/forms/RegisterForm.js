@@ -21,8 +21,8 @@ class RegisterForm extends AsyncForm {
 
         App.setState('user-logged');
 
-        const modal = App.getModal('register');
-        modal.close();
+        App.getModal('register').close();
+        
       } else {
         console.error(response.error);
         alert(response.error || 'Произошла ошибка при регистрации');

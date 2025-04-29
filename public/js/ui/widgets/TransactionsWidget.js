@@ -16,6 +16,7 @@ class TransactionsWidget {
     if(!element) {
       throw new Error('Элемент не найден');
     };
+    this.registerEvents();
   }
   /**
    * Регистрирует обработчики нажатия на
@@ -28,13 +29,11 @@ class TransactionsWidget {
     const buttonNewExpense = this.element.querySelector('.create-expense-button');
 
     buttonNewIncome.addEventListener('click', () => {
-      const modal = App.getModal('newIncom');
-      modal.open();
+      App.getModal('newIncome').open();
     });
 
     buttonNewExpense.addEventListener('click', () => {
-      const modal = App.getModal('newExpense');
-      modal.open();
+      App.getModal('newExpense').open();    
     });
   };
 }

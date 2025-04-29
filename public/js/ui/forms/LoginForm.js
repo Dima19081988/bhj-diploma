@@ -22,8 +22,8 @@ class LoginForm extends AsyncForm {
 
         App.setState('user-logged');
 
-        const modal = App.getModal('login');
-        modal.close();
+        App.getModal('login').close();
+        
       } else {
         console.error(response.error);
         alert(response.error || 'Произошла ошибка авторизации');

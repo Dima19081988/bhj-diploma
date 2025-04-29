@@ -27,5 +27,9 @@ const createRequest = (options = {}) => {
         callback(new Error(`Request failed. Status: ${xhr.status}`));
     }
 
+    xhr.onload = () => {
+        callback(null, xhr.response);
+    }
+
     xhr.send(method === 'GET' ? null : requestData);    
 };

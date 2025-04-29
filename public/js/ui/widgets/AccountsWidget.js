@@ -31,8 +31,7 @@ class AccountsWidget {
    * */
   registerEvents() {  
     this.element.querySelector('.create-account').addEventListener('click', () => {
-      const modal = App.getModal('createAccount');
-      modal.open();
+      App.getModal('createAccount').open();
     })
     
     this.element.addEventListener('click', (event) => {
@@ -126,8 +125,7 @@ class AccountsWidget {
     const dataContainer = document.createElement('div');
     dataContainer.innerHTML = html;
 
-    for (const child of dataContainer.children) {
-      this.element.appendChild(child)
-    }
+    const accountElement = dataContainer.firstChild;
+    this.element.appendChild(accountElement);
   }
 }
