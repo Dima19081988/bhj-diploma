@@ -10,9 +10,9 @@ class LoginForm extends AsyncForm {
    * закрывает окно, в котором находится форма
    * */
   onSubmit(data) {  
-    User.login(data, (err, response) => {
-      if (err) {
-        console.log(err);
+    User.login(data, (error, response) => {
+      if (error) {
+        console.error('Ошибка авторизации: ', error);
         alert('Ошибка сети');
         return;
       }

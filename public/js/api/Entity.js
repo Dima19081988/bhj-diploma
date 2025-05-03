@@ -11,12 +11,20 @@ class Entity {
    * (в зависимости от того, что наследуется от Entity)
    * */
   static list(data, callback){
+    if (typeof callback !== 'function') {
+      console.error('Account.list/Transaction.list вызван без функции-колбэка!', data, callback);
+    }
     createRequest({
       url: this.URL,
       method: 'GET',
       data,
-      callback: (err, response) => {
-        callback(err, response);
+      callback: (error, response) => {
+        if (error) {
+          return callback(error, null); 
+        }
+        if (response) {
+          callback(null, response);
+        }
       }
     });
   }
@@ -31,8 +39,13 @@ class Entity {
       url: this.URL,
       method: 'PUT',
       data,
-      callback: (err, response) => {
-        callback(err, response);
+      callback: (error, response) => {
+        if (error) {
+          return callback(error, null); 
+        }
+        if (response) {
+          callback(null, response);
+        }
       }
     });
   }
@@ -46,8 +59,13 @@ class Entity {
       url: this.URL,
       method: 'DELETE',
       data,
-      callback: (err, response) => {
-        callback(err, response);
+      callback: (error, response) => {
+        if (error) {
+          return callback(error, null); 
+        }
+        if (response) {
+          callback(null, response);
+        }
       }
     });
   };

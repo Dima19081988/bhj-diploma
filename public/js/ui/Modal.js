@@ -25,10 +25,10 @@ class Modal {
 	 * (с помощью метода Modal.onClose)
 	 * */
 	registerEvents() {
-		const closeButton = this.element.querySelector('[data-dismiss="modal"]');
-		if (closeButton) {
-			closeButton.addEventListener('click', () => this.onClose());
-		}
+		const closeButtons = this.element.querySelectorAll('[data-dismiss="modal"]');
+		closeButtons.forEach(btn => {
+			btn.addEventListener('click', () => this.onClose());
+		});
 	}
 	/**
 	 * Срабатывает после нажатия на элементы, закрывающие окно.

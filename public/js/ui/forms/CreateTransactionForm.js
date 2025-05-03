@@ -18,14 +18,21 @@ class CreateTransactionForm extends AsyncForm {
    * Обновляет в форме всплывающего окна выпадающий список
    * */
   renderAccountsList() {
-    Account.list((accounts) => { 
-      const select = this.element.querySelector('.accounts-select');
+    Account.list({}, (error, response) => { 
+      if (error) {
+        console.error('Ошибка получения счета: ', error);
+        alert('Ошибка сети');
+        return;
+      }
+      if (response && response.success && response.data) {
+        const select = this.element.querySelector('.accounts-select');
 
-      const optionsHtml = accounts.reduce((html, account) => {
-        return html + `<option value="${account.id}">${account.name}</option>`;
-      }, '');
-
-      select.innerHTML = optionsHtml;
+        const optionsHtml = response.data.reduce((html, account) => {
+          return html + `<option value="${account.id}">${account.name}</option>`;
+        }, '');
+  
+        select.innerHTML = optionsHtml;
+      }
     });
   }
 
@@ -36,7 +43,12 @@ class CreateTransactionForm extends AsyncForm {
    * в котором находится форма
    * */
   onSubmit(data) {
-    Transaction.create(data, (response) => {
+    Transaction.create(data, (error, response) => {
+      if (error) {
+        console.error('Ошибка транзакции: ', error);
+        alert('Ошибка сети');
+        return;
+      }
       if(response.success) {
         App.update();
         this.element.reset();

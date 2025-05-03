@@ -193,6 +193,51 @@
       "sum": 300000,
       "type": "expense",
       "user_id": "1"
+    },
+    {
+      "id": "tfp5wcma7t3t4a",
+      "type": "income",
+      "name": "Аванс",
+      "sum": 50000,
+      "account_id": "tfpay4ma2lkguq",
+      "user_id": "tfp8bcm9wkc2cp",
+      "created_at": "2025-05-03T05:53:03.273Z"
+    },
+    {
+      "id": "tfp17gma7uoy7w",
+      "type": "income",
+      "name": "Получка",
+      "sum": 40000,
+      "account_id": "tfpay4ma2lkguq",
+      "user_id": "tfp8bcm9wkc2cp",
+      "created_at": "2025-05-03T06:37:29.275Z"
+    },
+    {
+      "id": "tfp6kma7utpxd",
+      "type": "income",
+      "name": "получка",
+      "sum": 40000,
+      "account_id": "tfpay4ma2lkguq",
+      "user_id": "tfp8bcm9wkc2cp",
+      "created_at": "2025-05-03T06:41:11.808Z"
+    },
+    {
+      "id": "tfpbg8ma7vbf14",
+      "type": "income",
+      "name": "Сторонний доход",
+      "sum": 2222,
+      "account_id": "tfpay4ma2lkguq",
+      "user_id": "tfp8bcm9wkc2cp",
+      "created_at": "2025-05-03T06:54:57.495Z"
+    },
+    {
+      "id": "tfpef4ma7wtv8i",
+      "type": "income",
+      "name": "Зарплата",
+      "sum": 20000,
+      "account_id": "tfpay4ma2lkguq",
+      "user_id": "tfp8bcm9wkc2cp",
+      "created_at": "2025-05-03T07:37:17.921Z"
     }
   ]
 }

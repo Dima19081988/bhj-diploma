@@ -10,7 +10,8 @@ const createRequest = (options = {}) => {
     let requestData = null; 
 
     if (method === 'GET') {
-        const queryParams = Object.entries(data)
+        const safeData = data || {};
+        const queryParams = Object.entries(safeData)
             .map(([key, val]) => `${key}=${val}`)
             .join('&');
 
@@ -24,11 +25,15 @@ const createRequest = (options = {}) => {
     xhr.responseType = 'json';
 
     xhr.onerror = () => {
-        callback(new Error(`Request failed. Status: ${xhr.status}`));
+        if (typeof callback === 'function') {
+            callback(new Error(`Request failed. Status: ${xhr.status}`), null);
+        }
     }
 
     xhr.onload = () => {
-        callback(null, xhr.response);
+        if (typeof callback === 'function') {
+            callback(null, xhr.response);
+        }
     }
 
     xhr.send(method === 'GET' ? null : requestData);    

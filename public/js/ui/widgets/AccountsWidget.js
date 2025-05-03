@@ -55,7 +55,12 @@ class AccountsWidget {
    * */
   update() {
     if (User.current()) {
-      Account.list((response) => {
+      Account.list({}, (error, response) => {
+        if (error) {
+          console.error('Ошибка получения счета: ', error);
+          alert('Ошибка сети');
+          return;
+        }
         if (response.success) {
           this.clear();
           response.data.forEach(account => {

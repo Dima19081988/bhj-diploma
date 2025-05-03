@@ -38,8 +38,8 @@ class User {
     createRequest({
       url: this.URL + '/current',
       method: 'GET',
-      callback: (err, response) => {
-        if (err) return callback(err);
+      callback: (error, response) => {
+        if (error) return callback(error, null);
 
         if (response.success) {
           this.setCurrent(response.user);
@@ -63,8 +63,8 @@ class User {
       method: 'POST',
       responseType: 'json',
       data,
-      callback: (err, response) => {
-        if (err) return callback(err);
+      callback: (error, response) => {
+        if (error) return callback(error, null);
 
         if (response.success) {
           console.log("вход выполнен", response);
@@ -86,8 +86,8 @@ class User {
       url: this.URL + '/register',
       method: 'POST',
       data,
-      callback: (err, response) => {
-        if (err) return callback(err);
+      callback: (error, response) => {
+        if (error) return callback(error, null);
 
         if (response.success) {
           console.log("регистрация выполнена", response);
@@ -107,8 +107,8 @@ class User {
       url: this.URL + '/logout',
       method: 'POST',
       data: null,
-      callback: (err, response) => {
-        if (err) return callback(err);
+      callback: (error, response) => {
+        if (error) return callback(error, null);
         
         if (response.success) {
           console.log("выход выполнен", response);

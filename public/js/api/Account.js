@@ -13,8 +13,13 @@ class Account extends Entity {
       url: `${this.URL}/${id}`,
       method: 'GET',
       data: null,
-      callback: (err, response) => {
-        callback(err, response);
+      callback: (error, response) => {
+        if (error) {
+          return callback(error, null); 
+        }
+        if (response) {
+          callback(null, response);
+        }
       }
     });
   };

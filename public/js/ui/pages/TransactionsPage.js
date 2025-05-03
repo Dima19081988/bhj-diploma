@@ -63,7 +63,11 @@ class TransactionsPage {
     }
     const confirmation = confirm('Вы действительно хотите удалить аккаунт?');
     if (confirmation) {
-      Account.remove({ id: this.lastOptions.account_id }, (response) => {
+      Account.remove({ id: this.lastOptions.account_id }, (error, response) => {
+        if (error) {
+          console.error('Ошибка удаления аккаунта: ', error);
+          return;
+        }
         if (response.success) {
           App.updateWidgets();
           App.updateForms();
@@ -82,7 +86,11 @@ class TransactionsPage {
   removeTransaction( id ) {
     const confirmation = confirm('Вы действительно хотите удалить эту транзакцию?');
     if (confirmation) {
-      Transaction.remove({ id: id }, (response) => {
+      Transaction.remove({ id: id }, (error, response) => {
+        if (error) {
+          console.error('Ошибка удаления транзакции: ', error);
+          return;
+        }
         if(response.success) {
           this.update()
         };
@@ -102,11 +110,21 @@ class TransactionsPage {
     }
     this.lastOptions = options;
 
-    Account.get(options.account_id, (account) => {
-      if(account) {
-        this.renderTitle(account.name);
-        Transaction.list({ account_id: options.account_id }, (transactions) => {
-          this.renderTransactions(transactions);
+    Account.get(options.account_id, (error, accountResponse) => {
+      if(error) {
+        console.error('Ошибка при получении названия счёта: ', error);
+        return;
+      }
+      if(accountResponse && accountResponse.success) {
+        this.renderTitle(accountResponse.data.name);
+        Transaction.list({ account_id: options.account_id }, (error, transactionResponse) => {
+          if (error) {
+            console.error('Ошибка при получении транзакций:', error);
+            return;
+          }
+          if (transactionResponse && transactionResponse.success) {
+            this.renderTransactions(transactionResponse.data);
+          }
         });
       };
     });

@@ -10,9 +10,9 @@ class CreateAccountForm extends AsyncForm {
    * и сбрасывает форму
    * */
   onSubmit(data) {
-    Account.create(data, (err, response) => {
-      if (err) {
-        console.log(err);
+    Account.create(data, (error, response) => {
+      if (error) {
+        console.error('Ошибка сети: ', error);
         alert('Ошибка сети');
         return;
       }
