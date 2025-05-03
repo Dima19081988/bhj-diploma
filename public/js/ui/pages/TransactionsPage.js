@@ -170,7 +170,7 @@ class TransactionsPage {
    * */
   getTransactionHTML(item){
     const formattedDate = this.formatDate(item.created_at);
-    const transactionType = item.type.toLowerCase();
+    const transactionType = item.type === 'income' ? 'transaction_income' : 'transaction_expense';
 
     return `
       <div class="transaction ${transactionType} row">

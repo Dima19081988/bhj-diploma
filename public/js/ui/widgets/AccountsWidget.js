@@ -126,11 +126,6 @@ class AccountsWidget {
    * */
   renderItem(data){
     const html = this.getAccountHTML(data);
-    
-    const dataContainer = document.createElement('div');
-    dataContainer.innerHTML = html;
-
-    const accountElement = dataContainer.firstChild;
-    this.element.appendChild(accountElement);
+    this.element.insertAdjacentHTML('beforeend', html);
   }
 }
